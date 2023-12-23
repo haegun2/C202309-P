@@ -1,10 +1,11 @@
 #include "myheader.h"
 
-void StudentName(struct Student students[], int num_names) {
+void StudentName(struct Student students[], int num_names,int language) {
     for (int i = 0; i < num_names; i++) {
         printf("학생 %d의 이름을 입력하세요: ", i + 1);
         scanf_s("%s", students[i].name, sizeof(students[i].name));
         getchar();
+        students[i].languge = language;
     }
 }
 
@@ -22,5 +23,17 @@ void OutTotaltxt(int num_names, struct Student students[], char* home_txt, struc
 
         printf("\t%d년 %d월 %d일\n", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday);
         printf("\t담임교사 올림\n");
+    }
+}
+
+void OutTotaltxtEnglish(int num_names, struct Student students[], char* home_txt, struct tm* t) {
+    for (int i = 0; i < num_names; i++) {
+        printf("\nNewsletter #%d:\n\n", i + 1);
+        printf("Dear parents of %s, %s\n", students[i].name, home_txt);
+        printf("Thank you. Wishing happiness and peace to your family always.\n\n");
+
+        printf("\t%d-%02d-%02d\n", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday);
+        printf("\tSincerely,\n");
+        printf("\tClass Teacher\n");
     }
 }
